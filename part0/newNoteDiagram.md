@@ -1,5 +1,5 @@
 
-# New note squence diagram
+# New note sequence diagram
 
 ```mermaid
     sequenceDiagram

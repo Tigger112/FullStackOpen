@@ -18,21 +18,21 @@
         server-->>browser: HTML document
         deactivate server
 
-        browser->>server: GET /main.css
+        browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
         activate server 
-        server-->>browser: the CSS file
+        server-->>browser: CSS file
         deactivate server
 
-        browser->>server: GET /main.js
+        browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
         activate server 
-        server-->>browser: the JS file
+        server-->>browser: JS file
         deactivate server
 
         Note right of browser: The Javascript fetches the JSON from the server
 
-        browser->>server: GET /data.json
+        browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
         activate server
-        server-->>browser: notes in JSON 
+        server-->>browser: Notes in JSON. [{content [note], date [date]}] 
         deactivate server
 
         Note left of server: JSON with the updated notes  

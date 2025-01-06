@@ -1,31 +1,36 @@
 import { useState } from 'react'
 
 const Button = ({increase, text}) => <button onClick={increase}>{text}</button>
-const Statetistics = ({statetistics}) => {
+const StatisticLine  = ({text, value}) => {
+  return (
+  <tr>
+    <td>{text}</td>
+    <td>{value}</td>
+    </tr>
+  )
+}
+
+const Statistics = ({statistics}) => {
+  if (statistics.total === 0) {
     return (
       <div>
-        <ul>
-          <li>
-            good {statetistics.good}
-          </li>
-          <li>
-            neutral {statetistics.neutral}
-          </li>
-          <li>
-            bad {statetistics.bad}
-          </li>
-          <li>
-            total {statetistics.total}
-          </li>
-          <li>
-            average {statetistics.average}
-          </li>
-          <li>
-            positive {statetistics.positive} %
-          </li>
-        </ul>
+      no feedback given
       </div>
     )
+  }
+
+  return (
+    <table>
+      <tbody>
+      <StatisticLine text={'good'} value={statistics.good} />
+      <StatisticLine text={'neutral'} value={statistics.neutral} />
+      <StatisticLine text={'bad'} value={statistics.bad}/>
+      <StatisticLine text={'total'} value={statistics.total}/>
+      <StatisticLine text={'average'} value={statistics.average}/>
+      <StatisticLine text={'positive'} value={(statistics.positive + ' %')}/>
+      </tbody>
+    </table>
+  )
 }
 
 const App = () => {
@@ -49,7 +54,7 @@ const App = () => {
   const total = getTotal()
   const positive = getPositive(total)
   const average = getAverage(total)
-  const statetistics = {good, neutral, bad, total, average, positive}
+  const statistics = {good, neutral, bad, total, average, positive}
 
   return (
     <div>
@@ -57,7 +62,8 @@ const App = () => {
       <Button increase={() => setGood(good + 1)} text='add'/>
       <Button increase={() => setNeutral(neutral + 1)} text='neutral'/>
       <Button increase={() => setBad(bad + 1)} text='bad'/>
-      <Statetistics statetistics={statetistics}/>
+      <h1>statistics</h1>
+      <Statistics statistics={statistics}/>
     </div>
   )
 }

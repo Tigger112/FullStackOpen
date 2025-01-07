@@ -1,15 +1,15 @@
 import { useState } from 'react'
 
-const Button = ({ onClick, text }) => {
-  return (
-    <button onClick={onClick}>{text}</button>
-  )
-}
+const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 
 const Anecdote = ({ text, vote }) => {
   return (
     <div>
-      <p>{text}<br></br>has {vote} votes</p>
+      <p>
+        {text}
+        <br></br>
+        has {vote} votes
+      </p>
     </div>
   )
 }
@@ -44,11 +44,7 @@ const App = () => {
 
   function vote(index) {
     return () => {
-      if (!votesCopy[index]) {
-        votesCopy[index] = 1
-      } else {
-        votesCopy[index] += 1
-      }
+      votesCopy[index] += 1
       setVotes(votesCopy)
     }
   }

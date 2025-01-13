@@ -15,6 +15,7 @@ const PersonForm = ({
   setNewNumber,
   setPersons,
   personServices,
+  setNotification,
 }) => {
   const personCheck = () => persons.every((person) => person.name !== newName);
 
@@ -33,12 +34,30 @@ const PersonForm = ({
         setPersons(persons.concat(response));
         setNewName("");
         setNewNumber("");
+        setNotification({ message: `Added ${response.name}`, style: "succes" });
+        setTimeout(() => {
+          setNotification(null);
+        }, 5000);
       });
     } else if (window.confirm(message)) {
       const person = persons.find((person) => person.name === newName);
-
       personServices.update(person.id, newPerson).then((response) => {
         setPersons(persons.toSpliced(persons.indexOf(person), 1, response));
+        setNotification({ message: `Changed ${response.name} number`, style: "succes"});
+        setTimeout(() => {
+          setNotification(null);
+        }, 5000);
+      })
+      .catch(error => {
+        console.log(person);
+        
+        setNotification({
+          message: `Information of ${person.name} has already been removed from server`,
+          style: "error",
+        });
+        setTimeout(() => {
+          setNotification(null);
+        }, 5000);
       });
     }
   };
